@@ -1,7 +1,6 @@
 "use client";
-import Image from "next/image";
-import Link from "next/link";
 import { useEffect, useState } from "react";
+import CardMovie from "./components/card_movie";
 
 export default function Home() {
   const [popularMovies, setPopularMovies] = useState([]);
@@ -31,49 +30,13 @@ export default function Home() {
         <h2 className="text-3xl font-bold mb-6">Popular Movies</h2>
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
           {popularMovies.map((movie) => (
-            <div
-              key={movie.id}
-              className="bg-gray-800 rounded-lg overflow-hidden shadow-lg"
-            >
-              <Image
-                src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                alt={movie.title}
-                width={500}
-                height={500}
-                className="w-full h-64 object-cover"
-              />
-              <div className="p-4">
-                <h3 className="text-lg font-bold truncate">{movie.title}</h3>
-                <p className="text-sm text-gray-400">
-                  ⭐ {movie.vote_average.toFixed(1)}
-                </p>
-              </div>
-            </div>
+            <CardMovie key={movie.id} movie={movie} />
           ))}
         </div>
         <h2 className="text-3xl font-bold mb-6 mt-4">Top Rated Movies</h2>
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
           {topRatedMovies.map((movie) => (
-            <Link href={`/movies/${movie.id}`} key={movie.id}>
-              <div
-                key={movie.id}
-                className="bg-gray-800 rounded-lg overflow-hidden shadow-lg"
-              >
-                <Image
-                  src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                  alt={movie.title}
-                  width={500}
-                  height={500}
-                  className="w-full h-64 object-cover"
-                />
-                <div className="p-4">
-                  <h3 className="text-lg font-bold truncate">{movie.title}</h3>
-                  <p className="text-sm text-gray-400">
-                    ⭐ {movie.vote_average.toFixed(1)}
-                  </p>
-                </div>
-              </div>
-            </Link>
+            <CardMovie key={movie.id} movie={movie} />
           ))}
         </div>
       </main>
